@@ -1,0 +1,25 @@
+import tkinter
+import random
+wi=300
+canvas=tkinter.Canvas(width=wi,height=300,bg='white')
+canvas.pack()
+
+krok=15
+x=0
+y=150
+pocet = int(wi/krok)
+def ciara():
+    global krok,x ,y, pocet
+    for i in range(pocet):
+        skok=random.randint(-10,10)
+        canvas.create_line(x,y,x+krok,y+skok,width=7,fill='blue')
+    canvas.after(500,posun)
+
+def posun():
+    global x, y
+    x+=krok
+    canvas.after(500,ciara)
+
+ciara()
+
+canvas.mainloop()
