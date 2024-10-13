@@ -1,25 +1,46 @@
 import tkinter
 import random
 wi=300
+step=15
 canvas=tkinter.Canvas(width=wi,height=300,bg='white')
 canvas.pack()
 
-krok=15
-x=0
-y=150
-pocet = int(wi/krok)
-def ciara():
-    global krok,x ,y, pocet
-    for i in range(pocet):
-        skok=random.randint(-10,10)
-        canvas.create_line(x,y,x+krok,y+skok,width=7,fill='blue')
-    canvas.after(500,posun)
+# nakresli ciaru podla poslaneho pola s y
+def line(y_list):
+    canvas.delete('all')
+    x=0
+    for i in range (len(y_list)-1):
+        canvas.create_line(x,y_list[i],x+step,y_list[i+1],width=4,fill='blue')
+        x+=step
+    
 
-def posun():
-    global x, y
-    x+=krok
-    canvas.after(500,ciara)
+# posunie hodnotz v y:liste o poziciu vedla
+def shift_list(y_list):
+    for i in range (len(y_list)-1,0,-1):
+        y_list[i]=y_list[i-1]
+    return y_list
 
-ciara()
+#vygeneruje pole y
+def generate_list():
+    new_list=[]
+    for i in range(int(wi/step)):
+        new_list.append(generate_y())
+    return new_list
+
+#vygeneruj nahodny y
+def generate_y():
+    return random.randint(140,160)
+
+#oosunie hodnoty vygneruje novvy prvok, vykresli ciaru
+def shift_line(y_list):
+    y_list=shift_list(y_list)
+    y_list[0]=generate_y()
+    line(y_list)
+    canvas.after(500,lambda:shift_line(y_list))
+
+y_list=generate_list()
+line(y_list)
+
+canvas.after(500,lambda:shift_line(y_list))
 
 canvas.mainloop()
