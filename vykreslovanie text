@@ -1,0 +1,33 @@
+import tkinter
+wi=300
+canvas=tkinter.Canvas(width=wi, height=200,bg='white')
+canvas.pack()
+
+text='Dobre rano!'
+
+middle=(wi/2)
+letter_size=18
+start_text=middle-(len(text)*letter_size)/2
+x=0
+
+
+def delete():
+    canvas.delete('all')
+
+def print_text():
+    global start_text, x
+    canvas.create_text(start_text,100, text=text[x], font=['Courier',letter_size,'bold'])
+    x+=1
+    if x==(len(text)):
+        x=0
+        start_text=middle-(len(text)*letter_size)/2
+        canvas.after(2000,delete)
+        canvas.after(2500,print_text)
+    else:
+        start_text+=letter_size
+        canvas.after(500,print_text)
+
+
+canvas.after(500,print_text)
+
+canvas.mainloop()
