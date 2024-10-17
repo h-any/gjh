@@ -1,0 +1,24 @@
+import random
+
+def poprehadzuj(slovo):
+    if len(slovo)<=2:
+        return slovo
+    prve_p=slovo[0]
+    posledne_p=slovo[-1]
+    stred_slova=list(slovo[1:-1]) #list pouzijeme aby nam vytvorilo zoznam pismen a nie retazec
+    random.shuffle(stred_slova) #shuffle premiesa pismenka
+    zamiesane_slovo= slovo = prve_p + ''.join(stred_slova) + posledne_p #pomocou ''.join() spajame premiesane pismena, '' pouzivame aby name medzi pismena nic ine nepisalo - prazdny retazec
+
+    return zamiesane_slovo
+
+def rozdel_na_slova(zadana_veta):
+    spoznaj_slovo=zadana_veta.split() #split rozdeluje vetu na slova podla medzier
+    miesaj_kazde = [poprehadzuj(slovo) for slovo in spoznaj_slovo] #privola fciu poprehadzuj,  tolko krat kolko je slov vo vete
+    return '  '.join(miesaj_kazde)
+    
+def program():
+    zadana_veta = input('Zadany text: \n')
+    zamiesana_veta = rozdel_na_slova(zadana_veta)
+    print('Zamiesana veta: \n',zamiesana_veta)
+
+program()
