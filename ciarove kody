@@ -1,0 +1,32 @@
+import tkinter
+import random
+canvas=tkinter.Canvas(he=300,wi=600,bg='white')
+canvas.pack()
+
+x=85
+y=100
+
+
+for s in range (4):
+    canvas.create_rectangle(x,y,x+100,y+100,width=2)
+    x+=110
+    
+def cely_kod():
+    global x, y
+    x, y = 85, 100
+    
+    for kazdy_stvorec in range(4):  
+        kod = ''  
+        x = 85 + kazdy_stvorec * 110  
+
+        for k in range(8):
+            cislo = random.randint(0, 9)
+            kod += str(cislo)  
+            canvas.create_line(x + 15 + k*10, y + 10, x + 15 + k*10, y + 90, width=cislo)  
+
+        canvas.create_rectangle(x + 20, y + 80, x + 80, y + 95, fill='white', outline='')
+        canvas.create_text(x + 50, y + 85, text=kod, font=('Courier', 8), fill='black')
+
+cely_kod()
+
+canvas.mainloop()
