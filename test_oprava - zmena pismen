@@ -1,0 +1,39 @@
+import random
+import tkinter
+
+wi=400
+he=400
+
+canvas=tkinter.Canvas(width=wi,height=he,bg='white')
+canvas.pack()
+
+text=input()
+
+def vypis():
+    canvas.delete('all')
+    canvas.create_text(wi/2,he/2, text=text,font=('Ariel',15,'bold'))
+
+
+def zmen():
+    global text
+    text_list = list(text)
+    for i in range (3):
+        znak=random.randint(0,(len(text)-1))
+        if text_list[znak].isupper():
+            text_list[znak]=text_list[znak].lower()
+                
+        else:
+            text_list[znak]=text_list[znak].upper()
+
+    text = ''.join(text_list)
+    vypis()
+    canvas.after(500,zmen)
+
+def klik_zmen(event):
+    zmen()
+
+canvas.bind('<Button-1>',klik_zmen)
+
+vypis()
+
+canvas.mainloop()
