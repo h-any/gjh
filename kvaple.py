@@ -1,5 +1,3 @@
-#Zuzana Orihelová, Oktáva A
-
 import tkinter
 import random
 

@@ -1,0 +1,41 @@
+import random
+import tkinter 
+
+wi=400
+he=400
+
+canvas=tkinter.Canvas(width=wi,height=he,bg='white')
+canvas.pack()
+
+sirka_k=10
+pocet_k=20
+x_kvapel=wi/pocet_k
+Y=()+pocet_k*(0,)
+
+def nakresli():
+    global posun
+    canvas.delete('all')
+    uprav()
+    for i in range(pocet_k):
+        canvas.create_line(x_kvapel*i+sirka_k, 0, x_kvapel*i+sirka_k, Y[i], width=sirka_k, fill="light blue")
+    canvas.after(200,nakresli)
+
+def uprav():
+    global Y
+    posun=()
+    for a in range(pocet_k):
+        predlzenie=random.randint(0,10)
+        if Y[a]>100:
+            sanca=random.randint(0,100)
+            if sanca <=25:
+                rast=random.randint(30,50)
+            else:
+                rast=predlzenie
+        else:
+            rast=Y[a]+predlzenie
+        posun+=(rast,)
+    Y=posun
+
+nakresli()
+
+canvas.mainloop()
