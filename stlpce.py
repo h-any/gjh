@@ -36,3 +36,5 @@ for l in range(pocet):
     canvas.create_rectangle(x, y, x+sirka,y-list_hodnot[l], fill=farba)
     canvas.create_text(x+10,y-list_hodnot[l]/2,text=list_hodnot[l])
     x+=sirka*2
+
+canvas.mainloop()
