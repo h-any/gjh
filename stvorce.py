@@ -9,22 +9,40 @@ canvas.pack()
 
 y=140
 x=25
-farby=()
-for i in range (7):
+farby=[]
+stvorce=[]
+pocet_s=7
+
+for i in range (pocet_s):
     f=random.choice(('red','blue'))
-    farby+=f,
-    stvorec=canvas.create_rectangle(x,y,x+50,y+50,fill=f)
+    farby.append(f)
+    s=canvas.create_rectangle(x,y,x+50,y+50,fill=f)
+    stvorce.append(s)
     x+=50
+    
+def zmena(index):
+    if farby[index]=='red':
+        return 'blue'
+    else:
+        return 'red'
 
 def klik(event):
+    global l,koniec, koniec_b
     x1,y1=event.x,event.y
-    hranica=25
-    hranica1=75
-    if x1<hranica1 and x1>hranica and y1>140 and y1<190:
-        if f=='red':
-            canvas.itemconfig(stvorec,fill='blue')
-        else:
-            canvas.itemconfig(stvorec,fill='red')
-    
+
+    for i in range (pocet_s):
+        if (x1>25+i*50) and (x1<75 + i*50):
+
+            farby[i]=zmena(i)
+            canvas.itemconfig(stvorce[i],fill=farby[i])
+
+    if all(color == 'red' for color in farby):
+        canvas.create_text(200, 210, text='RE', font=('Arial', 15, 'bold'))
+        canvas.unbind('<Button-1>')
+
+    elif all(color == 'blue' for color in farby):
+        canvas.create_text(200, 210, text='BLUE', font=('Arial', 15, 'bold'))
+        canvas.unbind('<Button-1>')
 
 canvas.bind('<Button-1>',klik)
+canvas.mainloop()
