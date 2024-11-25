@@ -32,9 +32,13 @@ def klik(event):
         if (x1>25+i*50) and (x1<75 + i*50):
             if i > 0:
                 farby[i - 1] = zmena(farby[i - 1])
+                farby[i]=zmena(farby)
+                canvas.itemconfig(stvorce[i], fill=farby[i])
                 canvas.itemconfig(stvorce[i - 1], fill=farby[i - 1])
             if i < pocet_s - 1:
                 farby[i + 1] = zmena(farby[i + 1])
+                farby[i]=zmena(farby)
+                canvas.itemconfig(stvorce[i], fill=farby[i])
                 canvas.itemconfig(stvorce[i + 1], fill=farby[i + 1])
 
     if event.num==1:

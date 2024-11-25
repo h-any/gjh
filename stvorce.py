@@ -37,7 +37,7 @@ def klik(event):
             canvas.itemconfig(stvorce[i],fill=farby[i])
 
     if all(color == 'red' for color in farby):
-        canvas.create_text(200, 210, text='RE', font=('Arial', 15, 'bold'))
+        canvas.create_text(200, 210, text='RED', font=('Arial', 15, 'bold'))
         canvas.unbind('<Button-1>')
 
     elif all(color == 'blue' for color in farby):
